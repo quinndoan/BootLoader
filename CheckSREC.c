@@ -1,8 +1,8 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<stdint.h>
-#include<math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <math.h>
 
 #define HEX_INVALID 255
 
@@ -13,7 +13,7 @@ typedef enum {
     BYTE_COUNT_ERROR = 0x3
 } SrecStatus_t;
 
-struct Srec{
+typedef struct {
     uint8_t recordType;
     uint8_t sizeOfAddress;
     uint32_t ByteCount;
@@ -23,7 +23,7 @@ struct Srec{
     char *Data;
     uint8_t checksum;
     SrecStatus_t type;
-}Srec;
+} Srec;
 
 uint8_t char_to_hex(uint8_t c) {
     uint8_t result;
@@ -47,7 +47,7 @@ SrecStatus_t StrtoHex(const char *str, uint8_t len, uint32_t *pDecimal) {
     }
 
     *pDecimal = 0;
-	uint32_t idx;
+    uint32_t idx;
     for (idx = 0; idx < len; idx++) {
         if (char_to_hex(str[idx]) == HEX_INVALID) {
             result = SYNTAX_ERROR;
@@ -74,7 +74,7 @@ uint8_t calculate_checksum(const char *line, uint32_t sizeForLine) {
     return checksum;
 }
 
-SrecStatus_t ReadCheckLine(const char *line, struct Srec *line1) {
+SrecStatus_t ReadCheckLine(const char *line, Srec *line1) {
     if (line1 == NULL) {
         return BYTE_COUNT_ERROR;
     }
@@ -174,59 +174,46 @@ SrecStatus_t ReadCheckLine(const char *line, struct Srec *line1) {
     return SREC_TRUE;
 }
 
-void send_uart(const char *message) {
-    // Gi? l?p g?i thông báo qua UART
-    printf("UART: %s\n", message);
-}
-
-struct Srec* parse_srec(const char *line) {
-    struct Srec *record = (struct Srec *)malloc(sizeof(struct Srec));
-    if (record == NULL) {
-        send_uart("Memory allocation failed");
-        return NULL;
-    }
-
-    SrecStatus_t status = ReadCheckLine(line, record);
-    if (status != SREC_TRUE) {
+void printResult(SrecStatus_t status) {
+    if (status == SREC_TRUE) {
+        printf("TRUE\n");
+    } else {
+        printf("FALSE\n");
         switch (status) {
             case CHECK_SUM_ERROR:
-                send_uart("Checksum error");
+                printf("CHECK_SUM_ERROR\n");
                 break;
             case SYNTAX_ERROR:
-                send_uart("Syntax error");
+                printf("SYNTAX_ERROR\n");
                 break;
             case BYTE_COUNT_ERROR:
-                send_uart("Byte count error");
+                printf("BYTE_COUNT_ERROR\n");
                 break;
             default:
-                send_uart("Unknown error");
+                printf("UNKNOWN_ERROR\n");
                 break;
         }
-        free(record);
-        return NULL;
     }
-
-    return record;
 }
 
 int main() {
-    const char *line = "S113A0D092050A4302601948016820220A4302607B";
-    struct Srec *record = parse_srec(line);
+    FILE *fileptr = fopen("C:\\Users\\Nitro Tiger\\Downloads\\frdmkl46z_gpio_led_output.s19", "r");
+    if (fileptr == NULL) {
+        printf("Cannot open file\n");
+        exit(EXIT_FAILURE);
+    }
+    uint32_t countLine = 1;
 
-    if (record != NULL) {
-        printf("Record Type: S%c\n", line[1]);
-        printf("Byte Count: %u\n", record->ByteCount);
-        printf("Address: %s\n", record->Address);
-        printf("Data: %s\n", record->Data);
-        printf("Checksum: %u\n", record->checkSum);
-
-        free(record->Address);
-        free(record->Data);
-        free(record);
-    } else {
-        printf("Failed to parse SREC line.\n");
+    char line[256];
+    while (fgets(line, sizeof(line), fileptr)) {
+        Srec record;
+        SrecStatus_t result = ReadCheckLine(line, &record);
+        printf("Line %d:\n", countLine);
+        printResult(result);
+        countLine++;
     }
 
+    fclose(fileptr);
     return 0;
 }
 

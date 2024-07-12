@@ -20,7 +20,7 @@ typedef struct {
 
 Queue srecQueue = {{0}, 0, 0, 0};
 
-void Queue_Enqueue(Queue *q, uint8_t *data, uint16_t length);
+void Queue_Enqueue(Queue *q, char *data, uint16_t length);
 bool Queue_Dequeue(Queue *q, QueueItem *item);
 
 void test_queue();
@@ -32,7 +32,7 @@ int main(void) {
     return 0;
 }
 
-void Queue_Enqueue(Queue *q, uint8_t *data, uint16_t length) {
+void Queue_Enqueue(Queue *q, char *data, uint16_t length) {
     if (q->count < QUEUE_SIZE) {
         q->items[q->head].length = length;
         uint16_t i=0;
