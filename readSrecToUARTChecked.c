@@ -23,7 +23,7 @@ struct Srec{
     char *Data;
     uint8_t checksum;
     SrecStatus_t type;
-} ReadSrec;
+}Srec;
 
 uint8_t char_to_hex(uint8_t c) {
     uint8_t result;
@@ -210,7 +210,7 @@ struct Srec* parse_srec(const char *line) {
 }
 
 int main() {
-    const char *line = "S0100000626C696E6B4C65642E73726563EF";
+    const char *line = "S113A0D092050A4302601948016820220A4302607B";
     struct Srec *record = parse_srec(line);
 
     if (record != NULL) {

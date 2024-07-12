@@ -1,0 +1,15 @@
+C:\Users\Nitro Tiger\Documents\MCUXpressoIDE_11.9.1_2170\workspace\frdmkl46z_freertos_queue\CMSIS/core_cm0plus.h:733:22:__NVIC_EnableIRQ	16	static
+../source/mock3AddHandleCheckSum.c:64:5:main	48	static
+../source/mock3AddHandleCheckSum.c:83:6:UART_Initialize	16	static
+../source/mock3AddHandleCheckSum.c:132:6:UART_SendChar	16	static
+../source/mock3AddHandleCheckSum.c:138:6:UART_TransmitString	32	static
+../source/mock3AddHandleCheckSum.c:144:6:UART0_IRQHandler	16	static
+../source/mock3AddHandleCheckSum.c:154:6:Queue_Enqueue	24	static
+../source/mock3AddHandleCheckSum.c:163:6:Queue_Dequeue	16	static
+../source/mock3AddHandleCheckSum.c:174:9:char_to_hex	24	static
+../source/mock3AddHandleCheckSum.c:188:14:StrtoHex	40	static
+../source/mock3AddHandleCheckSum.c:208:9:calculate_checksum	32	static
+../source/mock3AddHandleCheckSum.c:223:14:ReadCheckLine	112	dynamic
+../source/mock3AddHandleCheckSum.c:323:6:Process_SREC	288	static
+../source/mock3AddHandleCheckSum.c:336:14:parse_srec	104	static
+../source/mock3AddHandleCheckSum.c:387:6:SendProcessedData	312	static
