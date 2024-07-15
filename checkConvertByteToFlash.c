@@ -24,7 +24,7 @@ uint8_t char_to_hex(uint8_t c) {
 void StrtoHex(const char *str, uint32_t len, uint32_t *pDecimal) {
     *pDecimal = 0;
     uint32_t i;
-    for (i = 0; i < len; i++) {
+    for (i= 0; i < len; i++) {
         uint8_t hex = char_to_hex(str[i]);
         *pDecimal = (*pDecimal << 4) | hex;
     }
@@ -33,7 +33,7 @@ void StrtoHex(const char *str, uint32_t len, uint32_t *pDecimal) {
 // Hàm main d? test
 int main() {
     // D? li?u gi? l?p t? chu?i SREC
-    const char *hexData = "48656C6C6F20576F726C64"; // "Hello World" trong hex
+    const char *hexData = "48656C6C6F20576F726C642121"; // "Hello World!!" trong hex
     uint32_t sizeOfData = strlen(hexData);
     uint8_t data[sizeOfData / 2];
     
@@ -48,18 +48,30 @@ int main() {
     // Ð?a ch? gi? l?p d? ghi vào Flash
     uint32_t address = 0x10000000;
 
-    // Ghi d? li?u vào flash theo t?ng kh?i 4 byte t?i cùng m?t d?a ch?
-    uint32_t m;
-    for (m = 0; m < sizeOfData / 2; m += 4) {
-        uint32_t word = 0;
+    // Ghi d? li?u vào flash t?i cùng m?t d?a ch?, t?ng kh?i 4 byte
+    uint32_t numBytes = sizeOfData / 2;
+    uint32_t numWords = (numBytes + 3) / 4;  // S? kh?i 4 byte
+    uint8_t buffer[4] = {0};  // B? d?m 4 byte
+
+    for (i = 0; i < numWords; i++) {
+        // Làm r?ng b? d?m
+        memset(buffer, 0, sizeof(buffer));
+        // Sao chép d? li?u vào b? d?m
         uint32_t j;
-        for (j = 0; j < 4 && (m + j) < sizeOfData / 2; j++) {
-            word |= data[m + j] << (8 * j);
+        for (j = 0; j < 4 && (i * 4 + j) < numBytes; j++) {
+            buffer[j] = data[i * 4 + j];
         }
+        // K?t h?p 4 byte thành m?t t? 32 bit
+        uint32_t word = 0;
+        for (j = 0; j < 4; j++) {
+            word |= buffer[j] << (8 * j);
+        }
+        // Ghi t? vào flash
         Program_LongWord_Command(address, word);  // Ghi vào cùng m?t d?a ch?
     }
 
     return 0;
 }
+
 
 
