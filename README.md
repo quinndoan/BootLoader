@@ -15,4 +15,4 @@ Bootloader is a project create a bootloader program. In this project, we using c
 
 ## Contributors
  1. Doan Thi Thu Quyen: UART, Queue, SREC, Program_Flash
- 2. Nguyen Trung Dung: PORT, GPIO, Processing Mode
+ 2. Nguyen Trung Dung: PORT, GPIO, Flash, Processing Mode
