@@ -3,9 +3,9 @@
 Bootloader is a project creating a simple bootloader program. This project utilizes the M-KL46Z chip and the MCUXpresso IDE.
 
 ## More Information about Bootloader Program
- - Boot Manager: A Boot Manager is a software program that is responsible for the management of the booting process of the computer. It is primarily responsible for selecting the Operating System to be loaded from multiple available options. Further, it also loads the Bootloader to perform the actual loading of the Operating System. A very popular example of Boot Manager is The BIOS boot manager.
+ - Boot Manager: A Boot Manager is a software program responsible for managing the computer's booting process. It primarily selects the operating system to load from multiple available options and loads the Bootloader to carry out the actual operating system loading. A well-known example of a Boot Manager is the BIOS boot manager.
 
- - Boot Loader: A Boot Loader is a software program that is responsible for “actually loading” the operating system once the Boot Manager has finished its work. Till the point Boot Loader starts loading the OS, there is nothing in the Main Memory of the machine. A very popular example of Boot Loader is Windows Boot Loader.
+ - Boot Loader: A Boot Loader is a software program responsible for actually loading the operating system after the Boot Manager has completed its task. Until the Boot Loader begins loading the OS, the machine's main memory remains empty. A well-known example of a Boot Loader is the Windows Boot Loader.
 
 ## Installation
  1. Install MCUXpresso IDE, you can install the IDE from NXP Official website.
