@@ -11,7 +11,7 @@ Bootloader is a project create a bootloader program. In this project, we using c
  1. Install MCUXpresso IDE, you can install the IDE from NXP Official website.
  2. Install Hercule for simulating send data from PC to chip, you can visit HW Group website for download.
  3. You need a chip M-KL46Z for debugging and running code.
- 4. Clone the repo and run the soure code in the MockOfficial Folder using MCUXpresso.
+ 4. Clone the repo and build project (all files in the MockOfficial Folder) using MCUXpresso.
 
 ## Contributors
  1. Doan Thi Thu Quyen: UART, Queue, SREC, Program_Flash
