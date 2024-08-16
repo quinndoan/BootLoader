@@ -8,9 +8,9 @@ Bootloader is a project creating a simple bootloader program. This project utili
  - Boot Loader: A Boot Loader is a software program responsible for actually loading the operating system after the Boot Manager has completed its task. Until the Boot Loader begins loading the OS, the machine's main memory remains empty. A well-known example of a Boot Loader is the Windows Boot Loader.
 
 ## Installation
- 1. Install MCUXpresso IDE, you can install the IDE from NXP Official website.
+ 1. Install MCUXpresso IDE
  2. Install Hercule to simulate sending data from a PC to chip. You can download it from the HW Group website.
- 3. You need a chip M-KL46Z for debugging and running code.
+ 3. A chip M-KL46Z for debugging and running code.
  4. Build project (all files in the MockOfficial Folder) using MCUXpresso.
 
 ## Contributors
